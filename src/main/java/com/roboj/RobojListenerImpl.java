@@ -15,7 +15,7 @@ public class RobojListenerImpl extends RobojBaseListener {
     }
 
     @Override
-    public void exitT(RobojParser.TContext ctx) {
+    public void exitFinders(RobojParser.FindersContext ctx) {
         TokenStream tokens = parser.getTokenStream();
         Document doc = null;
         try {
@@ -23,8 +23,7 @@ public class RobojListenerImpl extends RobojBaseListener {
         } catch(IOException e) {
             System.out.println("no connection");
         }
-		Element elem = doc.select(tokens.getText(ctx.element())).first();
+		Element elem = doc.select(tokens.getText(ctx.selector())).first();
 		System.out.println(elem.html());
-
     }
 }

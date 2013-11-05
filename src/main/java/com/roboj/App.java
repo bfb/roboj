@@ -21,7 +21,7 @@ public class App {
         RobojParser parser = new RobojParser(tokens);
         
         ParseTreeWalker walker = new ParseTreeWalker();
-        ParseTree tree = parser.t();
+        ParseTree tree = parser.start();
         
         RobojListenerImpl listener = new RobojListenerImpl(parser);
         walker.walk(listener, tree);
