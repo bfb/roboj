@@ -3,7 +3,6 @@ import org.antlr.v4.runtime.misc.Interval;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.io.File;
-import java.io.IOException;
 import org.jsoup.*;
 import org.jsoup.nodes.*;
 
@@ -15,15 +14,15 @@ public class RobojListenerImpl extends RobojBaseListener {
     }
 
     @Override
-    public void exitFinders(RobojParser.FindersContext ctx) {
+    public void exitFinder(RobojParser.FinderContext ctx) {
         TokenStream tokens = parser.getTokenStream();
-        Document doc = null;
-        try {
-            doc = Jsoup.connect("http://pt.wikipedia.org/wiki/Barack_Obama").get();    
-        } catch(IOException e) {
-            System.out.println("no connection");
-        }
-		Element elem = doc.select(tokens.getText(ctx.selector())).first();
-		System.out.println(elem.html());
+
+        String selectors = tokens.getText(ctx.selectors());
+        String attr = tokens.getText(ctx.property());
+        String url = "https://pt.wikipedia.org/wiki/Barack_Obama";
+        String id = tokens.getText(ctx.id());
+
+        Finder finder = new Finder(selectors, attr, url);
+        finder.find();
     }
 }

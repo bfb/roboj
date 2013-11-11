@@ -1,0 +1,4 @@
+bot wikipedia do
+	take h1:value as title
+	take div(.floatnone)[0] => a[0] => img[0]:src as image
+end
