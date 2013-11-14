@@ -19,10 +19,16 @@ public class RobojListenerImpl extends RobojBaseListener {
 
         String selectors = tokens.getText(ctx.selectors());
         String attr = tokens.getText(ctx.property());
-        String url = "https://pt.wikipedia.org/wiki/Barack_Obama";
         String id = tokens.getText(ctx.id());
 
-        Finder finder = new Finder(selectors, attr, url);
-        finder.find();
+        Finder finder = new Finder(selectors, attr.substring(1, attr.length()));
+        
+        Result.addFinder(finder);
+        //finder.find();
+    }
+
+    @Override
+    public void exitStart(RobojParser.StartContext ctx) {
+        Result.running();
     }
 }

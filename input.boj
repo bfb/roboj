@@ -1,4 +1,4 @@
-bot wikipedia do
-	take h1:value as title
-	take div(.floatnone)[0] => a[0] => img[0]:src as image
+bot livrariaCultura do
+	take div(.listagemProduto) => a => img:src as image
+	process self.substring(2, 10) end
 end

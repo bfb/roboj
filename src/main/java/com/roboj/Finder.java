@@ -5,33 +5,36 @@ import org.jsoup.select.Elements;
 
 public class Finder {
 	private Formatter formatter;
-
 	private Selector selector;
 	private String attr;
 	private String url;
 
-	public Finder(String selectors, String attr, String url) {
+	public Finder(String selectors, String attr) {
 		this.attr = attr;
-		this.url = url;
 		this.formatter = new Formatter(selectors);
+		this.selector = new Selector(formatter.format());
 	}
+
+	public Finder() {}
 
 	public String find() {
 		Document doc = establishConn();
 		Elements elems = doc.select("html");
-		String[] selectors = formatter.format().split(" ");
 		
+		String[] selectors = this.selector.getSelector().split(" ");
+
 		for(int i = 0; i < selectors.length; i++) {
-			selector = new Selector(selectors[i]);
-
-			elems = elems.select(selector.getSelector());
-			if(selector.getIndex() != null) {
-
-				elems = elems.eq(selector.getIndex());
+			Selector selectorPart = new Selector(selectors[i]);
+			elems = elems.select(selectorPart.getSelector());
+			if(selectorPart.getIndex() != null) {
+				elems = elems.eq(selectorPart.getIndex());
 			}
 		}
 
-		System.out.println(elems);
+		for(int i = 0; i < elems.size(); i++) {
+			System.out.println(i + " >>>>> " + elems.get(i).attr(attr));
+		}
+		
 		return elems.toString();
 	}
 
@@ -42,4 +45,33 @@ public class Finder {
             return null;
         }
 	}
+
+	public Selector getSelector() {
+		return selector;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public void setAttr(String attr) {
+		this.attr = attr;
+	}
+
+	public void setSelector(Selector selector) {
+		this.selector = selector;
+	}
+
+	public void setFormatter(Formatter formatter) {
+		this.formatter = formatter;
+	}
+
+	public Finder create() {
+		Finder finder = new Finder();
+		finder.setSelector(selector);
+		finder.setFormatter(formatter);
+		finder.setAttr(attr);
+		return finder;
+	}
+
 }
