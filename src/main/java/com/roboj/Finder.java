@@ -14,7 +14,7 @@ public class Finder {
 
 	public Finder(List<Selector> selectors, String attr, String id, Processor processor) {
 	    this.attr = attr;
-		this.selector = selectors;
+		this.selectors = selectors;
 		this.id = id;
 		this.processor = processor;
 		
@@ -34,8 +34,9 @@ public class Finder {
 			}
 		}
 
+		String result = "";
 		for(Element element : elements) {
-			System.out.println(i + " >>>>> " + element.attr(attr));
+			System.out.println(" >>>>> " + element.attr(attr));
 			System.out.println("PROCESSOR " + this.processor);
 			System.out.println(this.processor.process(element.attr(attr)));
 
