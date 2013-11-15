@@ -1,13 +1,16 @@
 grammar Roboj;
 
-start: 'bot' ID 'do' '\n' finders 'end';
+start: 'bot' ID 'do' finders 'end';
 
 finders: finder | finder finders;
-finder: take selectors property as id '\n'
-		| take selectors property as id '\n' process;
+finder: take selectors property as id
+		| take selectors property as id process;
 
-process : 'process' code 'end' '\n';
-code : 'self.substring(' NUMBER ',' NUMBER ')';
+process : 'process' code 'end';
+code : method '(' params ')';
+method: 'replace' | 'prefix' | 'sufix';
+params: param ',' params | param;
+param: ID;
 
 selectors : selector | selector '=>' selectors;
 selector : element'('tag')['NUMBER']' | element'('tag')' | element'['NUMBER']' | element;
@@ -22,4 +25,4 @@ tag: '.' ID | '#' ID;
 
 ID : [a-zA-Z]+([A-Za-z0-9] | '-')*;
 NUMBER : [0-9]+;
-WS : [ \t\r]+ -> skip;
+WS : [ \t\r\n]+ -> skip;

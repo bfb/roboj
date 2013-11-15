@@ -20,9 +20,13 @@ public class RobojListenerImpl extends RobojBaseListener {
         String selectors = tokens.getText(ctx.selectors());
         String attr = tokens.getText(ctx.property());
         String id = tokens.getText(ctx.id());
+        // validate if null
+        String process = tokens.getText(ctx.process().code());
+
+        System.out.println(process);
 
         Finder finder = new Finder(selectors, attr.substring(1, attr.length()));
-        
+
         Result.addFinder(finder);
         //finder.find();
     }

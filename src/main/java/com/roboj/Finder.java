@@ -8,6 +8,7 @@ public class Finder {
 	private Selector selector;
 	private String attr;
 	private String url;
+	private Processor processor;
 
 	public Finder(String selectors, String attr) {
 		this.attr = attr;
@@ -20,10 +21,11 @@ public class Finder {
 	public String find() {
 		Document doc = establishConn();
 		Elements elems = doc.select("html");
-		
+
 		String[] selectors = this.selector.getSelector().split(" ");
 
 		for(int i = 0; i < selectors.length; i++) {
+			System.out.println(selectors[i]);
 			Selector selectorPart = new Selector(selectors[i]);
 			elems = elems.select(selectorPart.getSelector());
 			if(selectorPart.getIndex() != null) {
@@ -33,8 +35,9 @@ public class Finder {
 
 		for(int i = 0; i < elems.size(); i++) {
 			System.out.println(i + " >>>>> " + elems.get(i).attr(attr));
+
 		}
-		
+
 		return elems.toString();
 	}
 
@@ -73,5 +76,4 @@ public class Finder {
 		finder.setAttr(attr);
 		return finder;
 	}
-
 }
