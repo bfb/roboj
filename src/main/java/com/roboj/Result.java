@@ -22,10 +22,10 @@ public class Result {
 		Long initalTime = System.currentTimeMillis();
 		ExecutorService executor = Executors.newFixedThreadPool(20);
         for (int i = 0; i < urls.size(); i++) {
-        	
+
         	List<Finder> finders2 = new ArrayList<Finder>();
         	for(Finder finder : finders) {
-        		finders2.add(finder.create());
+        		finders2.add(finder.getClone());
         	}
 
         	for (int j = 0; j < finders2.size(); j++) {
@@ -38,10 +38,10 @@ public class Result {
 
         executor.shutdown();
         while (!executor.isTerminated()) {
-        
+
         }
         Long finalTime = System.currentTimeMillis();
         System.out.println("time => " + (finalTime - initalTime));
         System.out.println("finished");
-	}	
+	}
 }
