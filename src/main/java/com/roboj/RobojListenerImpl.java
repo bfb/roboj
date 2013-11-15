@@ -29,15 +29,17 @@ public class RobojListenerImpl extends RobojBaseListener {
             selectors.add(new Selector(selectorParts[i]));
         }
 
-        String attr = tokens.getText(ctx.property());
-        String id = tokens.getText(ctx.id());
-        // validate if null
-
-        // if(tokens.getText(ctx.process()) != null){
+        Processor processor;
+        if(tokens.getText().contains("process")) {
             String method = tokens.getText(ctx.process().code().method());
             String[] params = tokens.getText(ctx.process().code().params()).split(",");
-            Processor processor = new Processor(method, params);
-        // }
+            processor = new Processor(method, params);
+        } else {
+           processor = new Processor("", new String[0]);
+        }
+
+        String attr = tokens.getText(ctx.property());
+        String id = tokens.getText(ctx.id());
 
         Finder finder = new Finder(selectors, attr.substring(1, attr.length()), id, processor);
 
