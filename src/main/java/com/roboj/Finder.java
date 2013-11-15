@@ -8,11 +8,13 @@ public class Finder {
 	private Selector selector;
 	private String attr;
 	private String url;
+	private String id;
 
-	public Finder(String selectors, String attr) {
-		this.attr = attr;
+	public Finder(String selectors, String attr, String id) {
+	    this.attr = attr;
 		this.formatter = new Formatter(selectors);
 		this.selector = new Selector(formatter.format());
+		this.id = id;
 	}
 
 	public Finder() {}
@@ -66,11 +68,16 @@ public class Finder {
 		this.formatter = formatter;
 	}
 
-	public Finder create() {
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Finder getClone() {
 		Finder finder = new Finder();
 		finder.setSelector(selector);
 		finder.setFormatter(formatter);
 		finder.setAttr(attr);
+		finder.setId(this.id);
 		return finder;
 	}
 

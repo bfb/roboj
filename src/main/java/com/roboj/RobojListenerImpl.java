@@ -21,14 +21,14 @@ public class RobojListenerImpl extends RobojBaseListener {
         String attr = tokens.getText(ctx.property());
         String id = tokens.getText(ctx.id());
 
-        Finder finder = new Finder(selectors, attr.substring(1, attr.length()));
+        Finder finder = new Finder(selectors, attr.substring(1, attr.length()), id);
         
-        Result.addFinder(finder);
+        Robot.addFinder(finder);
         //finder.find();
     }
 
     @Override
     public void exitStart(RobojParser.StartContext ctx) {
-        Result.running();
+        Robot.start();
     }
 }
