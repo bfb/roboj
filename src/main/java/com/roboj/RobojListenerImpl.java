@@ -8,20 +8,21 @@ import org.jsoup.nodes.*;
 
 public class RobojListenerImpl extends RobojBaseListener {
 	RobojParser parser;
+    String root;
 
     public RobojListenerImpl(RobojParser parser) {
         this.parser = parser;
+        this.root = "";
     }
 
     @Override
     public void exitFinder(RobojParser.FinderContext ctx) {
         TokenStream tokens = parser.getTokenStream();
 
-        String selector = tokens.getText(ctx.selectors());
+        String selector = this.root + tokens.getText(ctx.selectors());
         Formatter formatter = new Formatter(selector);
         selector = formatter.format();
 
-        
         List<Selector> selectors = new ArrayList<Selector>();
         String selectorParts[] = selector.split(" ");
 
@@ -41,7 +42,7 @@ public class RobojListenerImpl extends RobojBaseListener {
         String attr = tokens.getText(ctx.property());
         String id = tokens.getText(ctx.id());
 
-        Finder finder = new Finder(selectors, attr.substring(1, attr.length()), id, processor);
+        Finder finder = new Finder( selectors, attr.substring(1, attr.length()), id, processor);
 
         System.out.println(finder);
         Robot.addFinder(finder);
@@ -53,4 +54,14 @@ public class RobojListenerImpl extends RobojBaseListener {
     public void exitStart(RobojParser.StartContext ctx) {
         Robot.start();
     }
+
+    @Override
+    public void exitRoot(RobojParser.RootContext ctx) {
+        TokenStream tokens = parser.getTokenStream();
+
+        if(tokens.getText().contains("root"))
+            this.root = tokens.getText(ctx.selectors()) + "=>";
+
+    }
+
 }

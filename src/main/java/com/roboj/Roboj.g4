@@ -1,6 +1,8 @@
 grammar Roboj;
 
-start: 'bot' ID 'do' finders 'end';
+start: 'bot' ID 'do' body 'end';
+body: root finders | finders;
+root: 'root' selectors;
 
 finders: finder | finder finders;
 finder: take selectors property as id
