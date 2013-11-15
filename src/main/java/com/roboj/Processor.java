@@ -8,16 +8,12 @@ public class Processor {
     }
 
     public String process(String result) {
-        switch(this.method){
-            case "replace":
-                result = replace(result, this.params[0], this.params[1]);
-                break;
-            case "prefix":
-                result = prefix(result, this.params[0]);
-                break;
-            case "sufix":
-                result = sufix(result, this.params[0]);
-                break;
+        if(this.method == "replace"){
+            result = replace(result, this.params[0], this.params[1]);
+        } else if(this.method == "prefix"){
+            result = prefix(result, this.params[0]);
+        } else if(this.method == "sufix"){
+            result = sufix(result, this.params[0]);
         }
 
         return result;
