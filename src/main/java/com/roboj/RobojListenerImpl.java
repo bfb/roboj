@@ -21,12 +21,14 @@ public class RobojListenerImpl extends RobojBaseListener {
         String attr = tokens.getText(ctx.property());
         String id = tokens.getText(ctx.id());
         // validate if null
-        String process = tokens.getText(ctx.process().code());
 
-        System.out.println(process);
+        // if(tokens.getText(ctx.process()) != null){
+            String method = tokens.getText(ctx.process().code().method());
+            String[] params = tokens.getText(ctx.process().code().params()).split(",");
+            Processor processor = new Processor(method, params);
+        // }
 
-
-        Finder finder = new Finder(selectors, attr.substring(1, attr.length()), id);
+        Finder finder = new Finder(selectors, attr.substring(1, attr.length()), id, processor);
 
         Robot.addFinder(finder);
 
