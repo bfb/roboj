@@ -10,7 +10,7 @@ process : 'process' code 'end';
 code : method '(' params ')';
 method: 'replace' | 'prefix' | 'sufix';
 params: param ',' params | param;
-param: ID;
+param: STRING;
 
 selectors : selector | selector '=>' selectors;
 selector : element'('tag')['NUMBER']' | element'('tag')' | element'['NUMBER']' | element;
@@ -25,4 +25,5 @@ tag: '.' ID | '#' ID;
 
 ID : [a-zA-Z]+([A-Za-z0-9] | '-')*;
 NUMBER : [0-9]+;
+STRING : '"' ~'\n'*? '"';
 WS : [ \t\r\n]+ -> skip;

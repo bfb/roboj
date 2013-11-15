@@ -5,7 +5,7 @@ import org.jsoup.select.Elements;
 import java.util.*;
 
 public class Finder {
-	
+
 	private List<Selector> selectors;
 	private String attr;
 	private String url;
@@ -17,7 +17,7 @@ public class Finder {
 		this.selectors = selectors;
 		this.id = id;
 		this.processor = processor;
-		
+
 		System.out.println("PR => " + this.processor);
 	}
 
@@ -36,9 +36,7 @@ public class Finder {
 
 		String result = "";
 		for(Element element : elements) {
-			System.out.println(" >>>>> " + element.attr(attr));
-			System.out.println("PROCESSOR " + this.processor);
-			System.out.println(this.processor.process(element.attr(attr)));
+			System.out.println(" >>>>> " + this.processor.process(element.attr(attr)));
 
 			result += this.processor.process(element.attr(attr)) + ",\n";
 		}

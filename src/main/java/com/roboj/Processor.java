@@ -9,11 +9,11 @@ public class Processor {
 
     public String process(String result) {
         if(this.method.equals("replace")) {
-            result = replace(result, this.params[0], this.params[1]);
+            result = replace(result, this.params[0].replace("\"",  ""), this.params[1].replace("\"",  ""));
         } else if(this.method.equals("prefix")) {
-            result = prefix(result, this.params[0]);
+            result = prefix(result, this.params[0].replace("\"",  ""));
         } else if(this.method.equals("sufix")) {
-            result = sufix(result, this.params[0]);
+            result = sufix(result, this.params[0].replace("\"",  ""));
         }
 
         return result;
