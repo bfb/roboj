@@ -3,7 +3,7 @@ public class Selector {
 	private String text;
 	private Integer index;
 
-	public Selector(String selector) {
+	public Selector(String text) {
 		this.text = text;
 		this.index = findIndex();
 		removeIndex();
