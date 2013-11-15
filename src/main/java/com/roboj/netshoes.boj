@@ -1,0 +1,13 @@
+bot Netshoes do
+  take ul(.product-list) => li => a:href as link process
+    prefix http://www.netshoes.com.br
+  end
+
+  take ul(.product-list) => li => a => span(.product-img) img:src as thumbnail process
+    prefix http:
+  end
+
+  take ul(.product-list) => li => a => span(.product-info-holder) => strong(.new-price) as price
+
+  save as json
+end

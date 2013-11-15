@@ -1,5 +1,5 @@
 bot livrariaCultura do
 	take div(.listagemProduto) => a => img:src as image process
-    	replace(jpg, png)
+    	prefix("http:")
   end
 end
