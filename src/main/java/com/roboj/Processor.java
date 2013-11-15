@@ -31,4 +31,8 @@ public class Processor {
         return result + a;
     }
 
+    public String toString() {
+        return this.method + " - " + this.params;
+    }
+
 }

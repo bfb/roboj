@@ -40,7 +40,7 @@ public class Finder {
 			System.out.println("PROCESSOR " + this.processor);
 			System.out.println(this.processor.process(element.attr(attr)));
 
-			result += element.attr(attr);
+			result += this.processor.process(element.attr(attr)) + ",\n";
 		}
 
 		return result;
