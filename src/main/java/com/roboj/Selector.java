@@ -32,5 +32,9 @@ public class Selector {
 		}
 		return null;
 	}
+
+	public String toString() {
+		return this.text + " - " + this.index;
+	}
 	
 }

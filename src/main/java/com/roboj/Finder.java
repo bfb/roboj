@@ -85,4 +85,11 @@ public class Finder {
 		finder.setId(this.id);
 		return finder;
 	}
+
+	public String toString() {
+		return this.attr + " - " +
+		this.selectors + " - " +
+		this.id + " - " +
+		this.processor;
+	}
 }

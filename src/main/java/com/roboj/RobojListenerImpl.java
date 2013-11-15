@@ -41,6 +41,7 @@ public class RobojListenerImpl extends RobojBaseListener {
 
         Finder finder = new Finder(selectors, attr.substring(1, attr.length()), id, processor);
 
+        System.out.println(finder);
         Robot.addFinder(finder);
 
         //finder.find();
