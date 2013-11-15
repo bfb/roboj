@@ -22,7 +22,6 @@ public class FinderExecutor implements Runnable {
     }
 
     private void printFile(String found) {
-
         try {
             file.createNewFile();
             BufferedWriter out = new BufferedWriter(new FileWriter(file));

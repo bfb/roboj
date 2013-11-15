@@ -25,14 +25,16 @@ public class RobojListenerImpl extends RobojBaseListener {
 
         System.out.println(process);
 
-        Finder finder = new Finder(selectors, attr.substring(1, attr.length()));
 
-        Result.addFinder(finder);
+        Finder finder = new Finder(selectors, attr.substring(1, attr.length()), id);
+
+        Robot.addFinder(finder);
+
         //finder.find();
     }
 
     @Override
     public void exitStart(RobojParser.StartContext ctx) {
-        Result.running();
+        Robot.start();
     }
 }
