@@ -78,11 +78,16 @@ public class Finder {
 		return this.processor;
 	}
 
+	public void setProcessor(Processor processor) {
+		this.processor = processor;
+	}
+
 	public Finder getClone() {
 		Finder finder = new Finder();
 		finder.setSelectors(selectors);
 		finder.setAttr(attr);
 		finder.setId(this.id);
+		finder.setProcessor(this.processor);
 		return finder;
 	}
 
