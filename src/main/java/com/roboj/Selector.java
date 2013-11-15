@@ -1,16 +1,16 @@
 public class Selector {
 	
-	private String selector;
+	private String text;
 	private Integer index;
 
 	public Selector(String selector) {
-		this.selector = selector;
+		this.text = text;
 		this.index = findIndex();
 		removeIndex();
 	}
 
-	public String getSelector() {
-		return selector;
+	public String getText() {
+		return text;
 	}
 
 	public Integer getIndex() {
@@ -18,16 +18,16 @@ public class Selector {
 	}
 
 	public void removeIndex() {
-		if(selector.endsWith("]")) {
-			int i = selector.lastIndexOf("[");
-			selector = selector.substring(0, i);
+		if(text.endsWith("]")) {
+			int i = text.lastIndexOf("[");
+			text = text.substring(0, i);
 		}
 	}
 
 	public Integer findIndex() {
-		if(selector.endsWith("]")) {
-			int i = selector.lastIndexOf("[");
-			String index = selector.substring(i+1, selector.length() - 1);
+		if(text.endsWith("]")) {
+			int i = text.lastIndexOf("[");
+			String index = text.substring(i+1, text.length() - 1);
 			return Integer.valueOf(index);
 		}
 		return null;

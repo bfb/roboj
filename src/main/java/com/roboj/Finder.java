@@ -2,19 +2,19 @@ import org.jsoup.*;
 import org.jsoup.nodes.*;
 import java.io.IOException;
 import org.jsoup.select.Elements;
+import java.util.*;
 
 public class Finder {
-	private Formatter formatter;
-	private Selector selector;
+	
+	private List<Selector> selectors;
 	private String attr;
 	private String url;
 	private Processor processor;
 	private String id;
 
-	public Finder(String selectors, String attr, String id) {
+	public Finder(List<Selector> selectors, String attr, String id) {
 	    this.attr = attr;
-		this.formatter = new Formatter(selectors);
-		this.selector = new Selector(formatter.format());
+		this.selectors = selectors;
 		this.id = id;
 	}
 
@@ -22,25 +22,22 @@ public class Finder {
 
 	public String find() {
 		Document doc = establishConn();
-		Elements elems = doc.select("html");
+		Elements elements = doc.select("html");
 
-		String[] selectors = this.selector.getSelector().split(" ");
-
-		for(int i = 0; i < selectors.length; i++) {
-			System.out.println(selectors[i]);
-			Selector selectorPart = new Selector(selectors[i]);
-			elems = elems.select(selectorPart.getSelector());
-			if(selectorPart.getIndex() != null) {
-				elems = elems.eq(selectorPart.getIndex());
+		for(Selector selector : selectors) {
+			elements = elements.select(selector.getText());
+			if(selector.getIndex() != null) {
+				elements = elements.eq(selector.getIndex());
 			}
 		}
 
-		for(int i = 0; i < elems.size(); i++) {
-			System.out.println(i + " >>>>> " + elems.get(i).attr(attr));
-
+		String result = "";
+		for(Element element : elements) {
+			System.out.println(" >>>>> " + element.attr(attr));
+			result += element.attr(attr);
 		}
 
-		return elems.toString();
+		return result;
 	}
 
 	private Document establishConn() {
@@ -51,8 +48,8 @@ public class Finder {
         }
 	}
 
-	public Selector getSelector() {
-		return selector;
+	public List<Selector> getSelectors() {
+		return selectors;
 	}
 
 	public void setUrl(String url) {
@@ -63,12 +60,8 @@ public class Finder {
 		this.attr = attr;
 	}
 
-	public void setSelector(Selector selector) {
-		this.selector = selector;
-	}
-
-	public void setFormatter(Formatter formatter) {
-		this.formatter = formatter;
+	public void setSelectors(List<Selector> selectors) {
+		this.selectors = selectors;
 	}
 
 	public void setId(String id) {
@@ -77,8 +70,7 @@ public class Finder {
 
 	public Finder getClone() {
 		Finder finder = new Finder();
-		finder.setSelector(selector);
-		finder.setFormatter(formatter);
+		finder.setSelectors(selectors);
 		finder.setAttr(attr);
 		finder.setId(this.id);
 		return finder;

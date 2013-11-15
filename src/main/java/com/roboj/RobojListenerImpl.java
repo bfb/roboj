@@ -1,6 +1,6 @@
 import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.misc.Interval;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.Collections;
 import java.io.File;
 import org.jsoup.*;
@@ -17,7 +17,18 @@ public class RobojListenerImpl extends RobojBaseListener {
     public void exitFinder(RobojParser.FinderContext ctx) {
         TokenStream tokens = parser.getTokenStream();
 
-        String selectors = tokens.getText(ctx.selectors());
+        String selector = tokens.getText(ctx.selectors());
+        Formatter formatter = new Formatter(selector);
+        selector = formatter.format();
+
+        
+        List<Selector> selectors = new ArrayList<Selector>();
+        String selectorParts[] = selector.split(" ");
+
+        for(int i = 0; i < selectorParts.length; i++) {
+            selectors.add(new Selector(selectorParts[i]));
+        }
+
         String attr = tokens.getText(ctx.property());
         String id = tokens.getText(ctx.id());
         // validate if null

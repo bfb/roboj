@@ -11,11 +11,11 @@ public class Robot {
         finders.add(finder);
 	}
 
-	public static void printFinders() {
+	/*public static void printFinders() {
         for(Finder finder : finders) {
             System.out.println(finder.getSelector().getSelector());
         }
-	}
+	}*/
 
 	public static void start() {
         urls.add("http://www.livrariacultura.com.br/scripts/cultura/maisv/maisv.asp");
