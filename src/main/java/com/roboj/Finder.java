@@ -14,7 +14,8 @@ public class Finder {
 	private List<String> results; 
 
 	public Finder(List<Selector> selectors, String attr, String id, Processor processor) {
-	    this.attr = attr;
+
+		this.attr = attr;
 		this.selectors = selectors;
 		this.id = id;
 		this.processor = processor;
@@ -47,11 +48,11 @@ public class Finder {
 	}
 
 	private Document establishConn() {
-		try {
-			return Jsoup.connect(url).get();
-       	} catch(IOException e) {
-            return null;
-        }
+			try {
+					return Jsoup.connect(url).get();
+      } catch(IOException e) {
+          return null;
+      }
 	}
 
 	public List<Selector> getSelectors() {
