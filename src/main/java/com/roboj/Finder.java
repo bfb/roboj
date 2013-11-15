@@ -12,10 +12,13 @@ public class Finder {
 	private Processor processor;
 	private String id;
 
-	public Finder(List<Selector> selectors, String attr, String id) {
+	public Finder(List<Selector> selectors, String attr, String id, Processor processor) {
 	    this.attr = attr;
-		this.selectors = selectors;
+		this.selector = selectors;
 		this.id = id;
+		this.processor = processor;
+		
+		System.out.println("PR => " + this.processor);
 	}
 
 	public Finder() {}
@@ -31,9 +34,11 @@ public class Finder {
 			}
 		}
 
-		String result = "";
 		for(Element element : elements) {
-			System.out.println(" >>>>> " + element.attr(attr));
+			System.out.println(i + " >>>>> " + element.attr(attr));
+			System.out.println("PROCESSOR " + this.processor);
+			System.out.println(this.processor.process(element.attr(attr)));
+
 			result += element.attr(attr);
 		}
 
@@ -66,6 +71,10 @@ public class Finder {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public Processor getProcessor() {
+		return this.processor;
 	}
 
 	public Finder getClone() {
