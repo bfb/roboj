@@ -1,4 +1,5 @@
 bot livrariaCultura do
-	take div(.listagemProduto) => a => img:src as image
-	process self.substring(2, 10) end
+	take div(.listagemProduto) => a => img:src as image process
+    self.substring(2, 10)
+  end
 end
