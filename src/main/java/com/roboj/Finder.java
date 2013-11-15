@@ -11,13 +11,13 @@ public class Finder {
 	private String url;
 	private Processor processor;
 	private String id;
+	private List<String> results; 
 
 	public Finder(List<Selector> selectors, String attr, String id, Processor processor) {
 	    this.attr = attr;
 		this.selectors = selectors;
 		this.id = id;
 		this.processor = processor;
-
 		System.out.println("PR => " + this.processor);
 	}
 
@@ -35,13 +35,15 @@ public class Finder {
 		}
 
 		String result = "";
+		results = new ArrayList<String>();
 		for(Element element : elements) {
 			System.out.println(" >>>>> " + this.processor.process(element.attr(attr)));
 
-			result += this.processor.process(element.attr(attr)) + ",\n";
+			results.add(this.processor.process(element.attr(attr)));
+			result += this.processor.process(element.attr(attr)) + ",";
 		}
 
-		return result;
+		return JsonFormatter.format(id, results);
 	}
 
 	private Document establishConn() {
