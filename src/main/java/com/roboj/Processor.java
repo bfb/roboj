@@ -8,11 +8,11 @@ public class Processor {
     }
 
     public String process(String result) {
-        if(this.method == "replace"){
+        if(this.method.equals("replace")) {
             result = replace(result, this.params[0], this.params[1]);
-        } else if(this.method == "prefix"){
+        } else if(this.method.equals("prefix")) {
             result = prefix(result, this.params[0]);
-        } else if(this.method == "sufix"){
+        } else if(this.method.equals("sufix")) {
             result = sufix(result, this.params[0]);
         }
 
@@ -32,7 +32,11 @@ public class Processor {
     }
 
     public String toString() {
-        return this.method + " - " + this.params;
+        String text = this.method + " - ";
+        for(int i = 0; i < this.params.length; i++) {
+            text += this.params[i] + ",";
+        }
+        return text;
     }
 
 }
