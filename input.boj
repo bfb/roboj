@@ -2,7 +2,7 @@ bot livrariaCultura do
 
   root div(.listagemProduto)
 
-  take a => img:src as image process
+  take a[1]:href as image process
     	prefix("http:")
   end
 end

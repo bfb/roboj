@@ -30,7 +30,11 @@ public class Finder {
 
 		for(Selector selector : selectors) {
 			elements = elements.select(selector.getText());
+			
 			if(selector.getIndex() != null) {
+				if(selector.getIndex().equals("value")) {
+					elements = elements.eq(selector.getIndex());
+				}
 				elements = elements.eq(selector.getIndex());
 			}
 		}
@@ -38,7 +42,7 @@ public class Finder {
 		String result = "";
 		results = new ArrayList<String>();
 		for(Element element : elements) {
-			System.out.println(" >>>>> " + this.processor.process(element.attr(attr)));
+			//System.out.println(" >>>>> " + this.processor.process(element.attr(attr)));
 
 			results.add(this.processor.process(element.attr(attr)));
 			result += this.processor.process(element.attr(attr)) + ",";

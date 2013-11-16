@@ -6,7 +6,9 @@ root: 'root' selectors;
 
 finders: finder | finder finders;
 finder: take selectors property as id
-		| take selectors property as id process;
+		| take selectors property as id process
+		| take selectors as id
+		| take selectors as id process;
 
 process : 'process' code 'end';
 code : method '(' params ')';

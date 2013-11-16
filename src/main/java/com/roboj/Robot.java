@@ -18,7 +18,7 @@ public class Robot {
 	}*/
 
 	public static void start() {
-        urls.add("http://www.livrariacultura.com.br/scripts/cultura/home/lancamentos.asp?titem=1");
+        urls.add("http://www.netshoes.com.br/departamento/casual/tenis");
 
 		Long initalTime = System.currentTimeMillis();
         
