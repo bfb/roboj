@@ -13,6 +13,7 @@ public class Robot {
 
 	public static void start() {
         urls.add("http://www.netshoes.com.br/departamento/casual/tenis");
+        urls.add("http://www.netshoes.com.br/departamento/basquete?Nr=AND(sku.lancamento:1)&Ns=sku.sortPriority|0|&mi=sub__nat_mnleft__basquete_&cm_re=mnleft-_-_nat-_-_basquete_____&fc=menu");
 
 		Long initalTime = System.currentTimeMillis();
         

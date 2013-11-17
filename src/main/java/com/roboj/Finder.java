@@ -38,9 +38,9 @@ public class Finder {
 		results = new ArrayList<String>();
 		for(Element element : elements) {
 			if(attr.equals("value")) {
-				results.add("\"" + id +"\"" + ":" + "\"" + this.processor.process(element.html()) + "\"" + "\n");
+				results.add("\"" + id +"\"" + ":" + "\"" + this.processor.process(element.html()) + "\"");
 			} else {
-				results.add("\"" + id +"\"" + ":" + "\"" + this.processor.process(element.attr(attr)) + "\"" + "\n");	
+				results.add("\"" + id +"\"" + ":" + "\"" + this.processor.process(element.attr(attr)) + "\"");	
 			}
 		}
 

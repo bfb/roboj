@@ -17,7 +17,7 @@ public class FinderExecutor implements Runnable {
 
         List<String> ss = new ArrayList<String>();
         int size = 0;
-        String json = "{";
+        String json = "[";
 
         for(int i = 0; i < finders.size(); i++) {
             System.out.println(" - > -> " + finders.get(i).find().size());
@@ -29,13 +29,19 @@ public class FinderExecutor implements Runnable {
 
         for(int i = 0; i < size; i++) {
             json += "\n{\n";
-            for(int j = 0; j < finders.size(); j++) {
-                json += ss.get((j * size) + i);
+            json += ss.get(i);
+            for(int j = 1; j < finders.size(); j++) {
+                json += ",\n" + ss.get((j * size) + i);
             }
+            json += "\n";
             json += "}";
+            if(i < size -1) {
+                json += ",";
+            }
+            
         }
 
-        json += "}";
+        json += "\n]";
         printFile(json);
     }
 
