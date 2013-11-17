@@ -15,13 +15,27 @@ public class FinderExecutor implements Runnable {
     public void run() {
     	System.out.println(Thread.currentThread().getName() + " finding...");
 
+        List<String> ss = new ArrayList<String>();
+        int size = 0;
         String json = "{";
-        json += finders.get(0).find();
-        for(int i = 1; i < finders.size(); i++) {
-            json += ", " + finders.get(i).find();
-        }
-        json += "}";
 
+        for(int i = 0; i < finders.size(); i++) {
+            System.out.println(" - > -> " + finders.get(i).find().size());
+            ss.addAll(finders.get(i).find());
+        }
+
+        size = ss.size() / finders.size();
+        System.out.println(" - > -> " + size);
+
+        for(int i = 0; i < size; i++) {
+            json += "\n{\n";
+            for(int j = 0; j < finders.size(); j++) {
+                json += ss.get((j * size) + i);
+            }
+            json += "}";
+        }
+
+        json += "}";
         printFile(json);
     }
 

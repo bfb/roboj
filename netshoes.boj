@@ -5,11 +5,11 @@ bot Netshoes do
     prefix("http://www.netshoes.com.br")
   end
   
-  take a => span(.product-img) => img:src as thumbnail process
+  take a => span(.product-img) => noscript => img:src as thumbnail process
     prefix("http:")
   end
 
-  take a => span(.product-info-holder) => strong(.new-price):class as price process
-  	prefix("http:")
+  take a => span(.product-info-holder) => strong(.new-price):value as price process
+  	prefix("")
   end
 end

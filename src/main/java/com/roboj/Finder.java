@@ -14,7 +14,6 @@ public class Finder {
 	private List<String> results; 
 
 	public Finder(List<Selector> selectors, String attr, String id, Processor processor) {
-
 		this.attr = attr;
 		this.selectors = selectors;
 		this.id = id;
@@ -24,7 +23,7 @@ public class Finder {
 
 	public Finder() {}
 
-	public String find() {
+	public List<String> find() {
 		Document doc = establishConn();
 		Elements elements = doc.select("html");
 
@@ -32,23 +31,21 @@ public class Finder {
 			elements = elements.select(selector.getText());
 			
 			if(selector.getIndex() != null) {
-				if(selector.getIndex().equals("value")) {
-					elements = elements.eq(selector.getIndex());
-				}
 				elements = elements.eq(selector.getIndex());
 			}
 		}
 
-		String result = "";
 		results = new ArrayList<String>();
 		for(Element element : elements) {
-			//System.out.println(" >>>>> " + this.processor.process(element.attr(attr)));
-
-			results.add(this.processor.process(element.attr(attr)));
-			result += this.processor.process(element.attr(attr)) + ",";
+			if(attr.equals("value")) {
+				results.add("\"" + id +"\"" + ":" + "\"" + this.processor.process(element.html()) + "\"" + "\n");
+			} else {
+				results.add("\"" + id +"\"" + ":" + "\"" + this.processor.process(element.attr(attr)) + "\"" + "\n");	
+			}
 		}
 
-		return JsonFormatter.format(id, results);
+		return results;
+		//return JsonFormatter.format(id, results);
 	}
 
 	private Document establishConn() {

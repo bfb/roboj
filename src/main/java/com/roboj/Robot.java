@@ -5,17 +5,11 @@ import java.util.concurrent.Executors;
 public class Robot {
 	private static List<Finder> finders = new ArrayList<Finder>();
 	private static List<String> urls = new ArrayList<String>();
-    private static ExecutorService pool = Executors.newFixedThreadPool(20);
+    private static ExecutorService pool = Executors.newFixedThreadPool(10);
 
 	public static void addFinder(Finder finder) {
         finders.add(finder);
 	}
-
-	/*public static void printFinders() {
-        for(Finder finder : finders) {
-            System.out.println(finder.getSelector().getSelector());
-        }
-	}*/
 
 	public static void start() {
         urls.add("http://www.netshoes.com.br/departamento/casual/tenis");
@@ -27,12 +21,12 @@ public class Robot {
         	for(Finder finder : finders) {
         		findersCopy.add(finder.getClone());
         	}
-
+           
         	for (Finder finder : findersCopy) {
         		finder.setUrl(urls.get(i));
-	        }
-
-        	Runnable worker = new FinderExecutor(findersCopy, "url" + i);
+            }
+        	
+            Runnable worker = new FinderExecutor(findersCopy, "url" + i);
         	pool.execute(worker);
         }
 

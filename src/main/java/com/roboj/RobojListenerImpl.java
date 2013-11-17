@@ -31,18 +31,22 @@ public class RobojListenerImpl extends RobojBaseListener {
         }
 
         Processor processor;
-        if(tokens.getText().contains("process")) {
+        //if(tokens.getText().endsWith("end")) {
             String method = tokens.getText(ctx.process().code().method());
             String[] params = tokens.getText(ctx.process().code().params()).split(",");
             processor = new Processor(method, params);
-        } else {
-           processor = new Processor("", new String[0]);
-        }
+        //} else {
+          // processor = new Processor("", new String[0]);
+        //}
 
-        String attr = tokens.getText(ctx.property());
+        //String attr = " ";
+        //if(tokens.getText().contains(":[a-z]' 'as")) {
+           String attr = tokens.getText(ctx.property());
+        //}
+        
         String id = tokens.getText(ctx.id());
 
-        Finder finder = new Finder( selectors, attr.substring(1, attr.length()), id, processor);
+        Finder finder = new Finder(selectors, attr.substring(1, attr.length()), id, processor);
 
         System.out.println(finder);
         Robot.addFinder(finder);
