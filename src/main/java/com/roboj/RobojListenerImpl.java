@@ -58,6 +58,7 @@ public class RobojListenerImpl extends RobojBaseListener {
 
     @Override
     public void exitStart(RobojParser.StartContext ctx) {
+        Logger.init();
         Robot.start();
     }
 

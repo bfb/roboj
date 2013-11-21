@@ -18,7 +18,6 @@ public class Finder {
 		this.selectors = selectors;
 		this.id = id;
 		this.processor = processor;
-		System.out.println("PR => " + this.processor);
 	}
 
 	public Finder() {}
@@ -67,6 +66,10 @@ public class Finder {
 
 
 	// getters and setters
+
+	public String getUrl() {
+		return url;
+	}
 
 	public List<Selector> getSelectors() {
 		return selectors;

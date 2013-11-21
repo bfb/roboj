@@ -11,14 +11,15 @@ public class Robot {
         finders.add(finder);
 	}
 
-	public static void start() {
-        urls.add("http://en.wikipedia.org/wiki/Barack_Obama");
-        urls.add("http://en.wikipedia.org/wiki/Donald_Knuth");
-        urls.add("http://en.wikipedia.org/wiki/Bill_Gates");
-        //urls.add("http://www.livrariacultura.com.br/scripts/cultura/maisv/maisv.asp?titem=1&nassunto=1&nveiculomv=1&cidioma=por");
+    public static void addUrl(String url) {
+        urls.add(url);
+    }
 
-		Long initalTime = System.currentTimeMillis();
-        
+    public static void setConcurrency(int threads) {
+        pool = Executors.newFixedThreadPool(threads);
+    }
+
+	public static void start() {
         for (int i = 0; i < urls.size(); i++) {
         	List<Finder> findersCopy = new ArrayList<Finder>();
         	for(Finder finder : finders) {
@@ -29,7 +30,7 @@ public class Robot {
         		finder.setUrl(urls.get(i));
             }
         	
-            Runnable worker = new FinderExecutor(findersCopy, "url" + i);
+            Runnable worker = new FinderExecutor(findersCopy, "data/url" + i + ".json");
         	pool.execute(worker);
         }
 
@@ -37,8 +38,7 @@ public class Robot {
         while (!pool.isTerminated()) {
         
         }
-        Long finalTime = System.currentTimeMillis();
-        System.out.println("time => " + (finalTime - initalTime));
-        System.out.println("finished");
+
+        Logger.done();
 	}	
 }

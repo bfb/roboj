@@ -13,22 +13,23 @@ public class FinderExecutor implements Runnable {
 
     @Override
     public void run() {
-    	System.out.println(Thread.currentThread().getName() + " finding...");
-
-        List<String> ss = new ArrayList<String>();
-        int size = 0;
-        String json = "[";
-
+    	String threadName = Thread.currentThread().getName();
+        Logger.urlAccessed(threadName, finders.get(0).getUrl());
+        List<String> finded = new ArrayList<String>();
+        
         for(int i = 0; i < finders.size(); i++) {
-            ss.addAll(finders.get(i).find());
+            finded.addAll(finders.get(i).find());
         }
 
-        size = ss.size() / finders.size();
+        int size = 0;
+        size = finded.size() / finders.size();
+
+        String json = "[";
         for(int i = 0; i < size; i++) {
             json += "\n{\n";
-            json += ss.get(i);
+            json += finded.get(i);
             for(int j = 1; j < finders.size(); j++) {
-                json += ",\n" + ss.get((j * size) + i);
+                json += ",\n" + finded.get((j * size) + i);
             }
             json += "\n";
             json += "}";
@@ -37,14 +38,17 @@ public class FinderExecutor implements Runnable {
             }
             
         }
-
         json += "\n]";
+
         printFile(json);
     }
 
     private void printFile(String found) {
+        String threadName = Thread.currentThread().getName();
         try {
+            new File("data").mkdirs();
             file.createNewFile();
+            Logger.fileSaved(threadName, file.getAbsolutePath());
             BufferedWriter out = new BufferedWriter(new FileWriter(file));
             out.write(found);
             out.close();

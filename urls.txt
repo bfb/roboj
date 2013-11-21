@@ -1,0 +1,3 @@
+http://en.wikipedia.org/wiki/Barack_Obama
+http://en.wikipedia.org/wiki/Donald_Knuth
+http://en.wikipedia.org/wiki/Bill_Gates
