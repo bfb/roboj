@@ -1,0 +1,11 @@
+bot Wikipedia do
+
+  take h1 => span as title
+  
+  take div(#mw-content-text) => a(.image)[0] => img:src as image process
+    prefix("http:")
+  end
+  
+  save_as json
+  
+end

@@ -5,15 +5,17 @@ import java.util.concurrent.Executors;
 public class Robot {
 	private static List<Finder> finders = new ArrayList<Finder>();
 	private static List<String> urls = new ArrayList<String>();
-    private static ExecutorService pool = Executors.newFixedThreadPool(1);
+    private static ExecutorService pool = Executors.newFixedThreadPool(10);
 
 	public static void addFinder(Finder finder) {
         finders.add(finder);
 	}
 
 	public static void start() {
-        urls.add("http://www.livrariacultura.com.br/scripts/cultura/maisv/maisv.asp");
-        urls.add("http://www.livrariacultura.com.br/scripts/cultura/maisv/maisv.asp?titem=1&nassunto=1&nveiculomv=1&cidioma=por");
+        urls.add("http://en.wikipedia.org/wiki/Barack_Obama");
+        urls.add("http://en.wikipedia.org/wiki/Donald_Knuth");
+        urls.add("http://en.wikipedia.org/wiki/Bill_Gates");
+        //urls.add("http://www.livrariacultura.com.br/scripts/cultura/maisv/maisv.asp?titem=1&nassunto=1&nveiculomv=1&cidioma=por");
 
 		Long initalTime = System.currentTimeMillis();
         
