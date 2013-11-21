@@ -1,11 +1,11 @@
 public class Logger {
 
 	public static void init() {
-		System.out.println("starting boj");
+		System.out.println("starting boj\n");
 	}
 
 	public static void done() {
-		System.out.println("done");
+		System.out.println("\ndone");
 	}
 
 	public static void urlAccessed(String thread, String url) {

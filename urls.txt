@@ -1,3 +1,2 @@
-http://en.wikipedia.org/wiki/Barack_Obama
-http://en.wikipedia.org/wiki/Donald_Knuth
-http://en.wikipedia.org/wiki/Bill_Gates
+http://www.netshoes.com.br/departamento/basquete/tenis?Nr=product.genderList:Masculino&Ns=sku.sortPriority|0&cm_re=mntop-_-ger_-_-_H-CAL-Tenisdebasquete_____&fc=menu
+http://www.netshoes.com.br/search?Nr=OR(product.productType.displayName:Luvas,product.productType.displayName:Luvas%20de%20Goleiro),AND(product.genderList:Masculino)&Ns=sku.sortPriority|0&mi=hm_ger__mntop__H-ACE-luvas%20_&cm_re=mntop-_-ger_-_-_H-ACE-luvas%20_____&fc=menu
