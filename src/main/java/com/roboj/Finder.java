@@ -35,9 +35,8 @@ public class Finder {
 			}
 		}
 
-		results = new ArrayList<String>();
 		for(Element element : elements) {
-			if(attr.equals("value")) {
+			if(attr.equals("")) {
 				results.add("\"" + id +"\"" + ":" + "\"" + this.processor.process(element.html()) + "\"");
 			} else {
 				results.add("\"" + id +"\"" + ":" + "\"" + this.processor.process(element.attr(attr)) + "\"");	
@@ -49,12 +48,25 @@ public class Finder {
 	}
 
 	private Document establishConn() {
-			try {
-					return Jsoup.connect(url).get();
-      } catch(IOException e) {
+		try {
+			return Jsoup.connect(url).get();
+		} catch(IOException e) {
           return null;
-      }
+        }
 	}
+
+	public Finder getClone() {
+		Finder finder = new Finder();
+		finder.setSelectors(selectors);
+		finder.setAttr(attr);
+		finder.setId(this.id);
+		finder.setProcessor(this.processor);
+		finder.setResults(new ArrayList<String>());
+		return finder;
+	}
+
+
+	// getters and setters
 
 	public List<Selector> getSelectors() {
 		return selectors;
@@ -76,21 +88,16 @@ public class Finder {
 		this.id = id;
 	}
 
+	public void setResults(List<String> results) {
+		this.results = results;
+	}
+
 	public Processor getProcessor() {
 		return this.processor;
 	}
 
 	public void setProcessor(Processor processor) {
 		this.processor = processor;
-	}
-
-	public Finder getClone() {
-		Finder finder = new Finder();
-		finder.setSelectors(selectors);
-		finder.setAttr(attr);
-		finder.setId(this.id);
-		finder.setProcessor(this.processor);
-		return finder;
 	}
 
 	public String toString() {

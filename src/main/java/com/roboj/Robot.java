@@ -5,15 +5,15 @@ import java.util.concurrent.Executors;
 public class Robot {
 	private static List<Finder> finders = new ArrayList<Finder>();
 	private static List<String> urls = new ArrayList<String>();
-    private static ExecutorService pool = Executors.newFixedThreadPool(10);
+    private static ExecutorService pool = Executors.newFixedThreadPool(1);
 
 	public static void addFinder(Finder finder) {
         finders.add(finder);
 	}
 
 	public static void start() {
-        urls.add("http://www.netshoes.com.br/departamento/casual/tenis");
-        urls.add("http://www.netshoes.com.br/departamento/basquete?Nr=AND(sku.lancamento:1)&Ns=sku.sortPriority|0|&mi=sub__nat_mnleft__basquete_&cm_re=mnleft-_-_nat-_-_basquete_____&fc=menu");
+        urls.add("http://www.livrariacultura.com.br/scripts/cultura/maisv/maisv.asp");
+        urls.add("http://www.livrariacultura.com.br/scripts/cultura/maisv/maisv.asp?titem=1&nassunto=1&nveiculomv=1&cidioma=por");
 
 		Long initalTime = System.currentTimeMillis();
         
@@ -23,7 +23,7 @@ public class Robot {
         		findersCopy.add(finder.getClone());
         	}
            
-        	for (Finder finder : findersCopy) {
+        	for(Finder finder : findersCopy) {
         		finder.setUrl(urls.get(i));
             }
         	

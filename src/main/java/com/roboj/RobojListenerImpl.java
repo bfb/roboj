@@ -8,11 +8,13 @@ import org.jsoup.nodes.*;
 
 public class RobojListenerImpl extends RobojBaseListener {
 	RobojParser parser;
-    String root;
+    private String root;
+    private String property;
 
     public RobojListenerImpl(RobojParser parser) {
         this.parser = parser;
         this.root = "";
+        this.property = "";
     }
 
     @Override
@@ -25,33 +27,33 @@ public class RobojListenerImpl extends RobojBaseListener {
 
         List<Selector> selectors = new ArrayList<Selector>();
         String selectorParts[] = selector.split(" ");
-
         for(int i = 0; i < selectorParts.length; i++) {
             selectors.add(new Selector(selectorParts[i]));
         }
 
         Processor processor;
-        //if(tokens.getText().endsWith("end")) {
-            String method = tokens.getText(ctx.process().code().method());
-            String[] params = tokens.getText(ctx.process().code().params()).split(",");
-            processor = new Processor(method, params);
-        //} else {
-          // processor = new Processor("", new String[0]);
-        //}
-
-        //String attr = " ";
-        //if(tokens.getText().contains(":[a-z]' 'as")) {
-           String attr = tokens.getText(ctx.property());
-        //}
+        String method;
+        String[] params;
+        try {    
+            method = tokens.getText(ctx.process().code().method());
+            params = tokens.getText(ctx.process().code().params()).split(",");
+        } catch(NullPointerException e) {
+            method = "";
+            params = new String[0];
+        }
+        processor = new Processor(method, params);
         
+        String attr;
+        try {
+            attr = tokens.getText(ctx.property());
+            attr = attr.substring(1, attr.length());
+        } catch(NullPointerException e) {
+            attr = "";
+        }
+
         String id = tokens.getText(ctx.id());
-
-        Finder finder = new Finder(selectors, attr.substring(1, attr.length()), id, processor);
-
-        System.out.println(finder);
+        Finder finder = new Finder(selectors, attr, id, processor);
         Robot.addFinder(finder);
-
-        //finder.find();
     }
 
     @Override
@@ -65,7 +67,5 @@ public class RobojListenerImpl extends RobojBaseListener {
 
         if(tokens.getText().contains("root"))
             this.root = tokens.getText(ctx.selectors()) + "=>";
-
     }
-
 }

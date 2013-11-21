@@ -9,7 +9,7 @@ bot Netshoes do
     prefix("http:")
   end
 
-  take a => span(.product-info-holder) => strong(.new-price):value as price process
-  	prefix("")
-  end
+  take a => span(.product-info-holder) => strong(.new-price):value as price
+
+  save_as json
 end

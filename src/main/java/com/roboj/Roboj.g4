@@ -1,6 +1,6 @@
 grammar Roboj;
 
-start: 'bot' ID 'do' body 'end';
+start: 'bot' ID 'do' body save 'end';
 body: root finders | finders;
 root: 'root' selectors;
 
@@ -21,13 +21,15 @@ selector : element'('tag')['NUMBER']' | element'('tag')' | element'['NUMBER']' |
 
 take : 'take';
 as : 'as';
+save : 'save_as' format;
+format : 'json';
+
 id : ID;
 element : ID;
 property : ':' ID;
-
 tag: '.' ID | '#' ID;
 
-ID : [a-zA-Z]+([A-Za-z0-9] | '-')*;
+ID : [a-zA-Z]+([A-Za-z0-9] | '-' | '_')*;
 NUMBER : [0-9]+;
 STRING : '"' ~'\n'*? '"';
 WS : [ \t\r\n]+ -> skip;

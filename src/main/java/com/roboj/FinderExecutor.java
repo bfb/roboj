@@ -20,13 +20,10 @@ public class FinderExecutor implements Runnable {
         String json = "[";
 
         for(int i = 0; i < finders.size(); i++) {
-            System.out.println(" - > -> " + finders.get(i).find().size());
             ss.addAll(finders.get(i).find());
         }
 
         size = ss.size() / finders.size();
-        System.out.println(" - > -> " + size);
-
         for(int i = 0; i < size; i++) {
             json += "\n{\n";
             json += ss.get(i);

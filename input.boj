@@ -2,7 +2,11 @@ bot livrariaCultura do
 
   root div(.listagemProduto)
 
-  take a[1]:href as image process
-    	prefix("http:")
+  take div(.img_sinopse) => h4 => a as title process
+  		replace("NADA", "TUDO")
   end
+
+  take a => img:src as image
+
+  save_as json
 end
